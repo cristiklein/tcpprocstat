@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [ "$1" = "" ]; then
+	echo "Usage: tcpprocstat command [args]"
+	exit 1
+fi
+
+export LD_PRELOAD="@libdir@/libtcpprocstat.so:$LD_PRELOAD"
+exec 100>&2 # Redirect libtcpprocstat's output to stderr
+exec $@
+

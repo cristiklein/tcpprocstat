@@ -1,0 +1,13 @@
+tcpprocstat is used similarly to the `time' command, but returns the number of
+bytes an application has sent and received using the TCP protocol.
+
+tcpprocstat uses libtcpprocstat which it LD_PRELOADs to intercept the read(),
+write(), recv(), send() calls. The number of bytes successfully received
+/ sent (i.e. the return value of the above functions) is added to global
+counters. Only file descriptors which have been created using
+socket() of type SOCK_STREAM are taken into considerations. libtcpprocstat
+ignores bytes received with MSG_PEEK.
+
+All the limitation typical to LD_PRELOADed stuff applies. For example,
+you cannot tcpprocstat a static executable or a setuid executable.
+
